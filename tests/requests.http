@@ -6,12 +6,12 @@ Content-Type: application/json
 {
     "first_name": "your_name",
     "last_name": "last_yame",
-    "email": "newtestuser@gmail.com",
+    "email": "mockuser@example.com",
     "cep": "12345678",
     "country": "Brazil",
     "city": "São Paulo",
-    "address": "Rua das Flores, 123",
-    "password": "!1989@name"
+    "address": "Rua mock, 123",
+    "password": "mock@password"
 }
 
 
@@ -23,12 +23,12 @@ Content-Type: application/json
 {
     "first_name": 123,
     "last_name": "Last_Name",
-    "email": "testuser@gmail.com",
+    "email": "mockuser@example.com",
     "cep": "12345-678",
     "country": "Brazil",
     "city": "São Paulo",
-    "address": "Rua das Flores, 123",
-    "password": "!1989@first"
+    "address": "Rua mock, 123",
+    "password": "mock@password"
 }
 
 
@@ -39,11 +39,11 @@ Content-Type: application/json
 
 {
     "last_name": "Last_Name",
-    "email": "testuser@gmail.com",
+    "email": "mockuser@example.com",
     "cep": "12345-678",
     "country": "Brazil",
     "city": "São Paulo",
-    "address": "Rua das Flores, 123"
+    "address": "Rua mock, 123",
 }
 
 ### invalid json
@@ -61,8 +61,8 @@ POST http://localhost:8080/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "newtestuser@gmail.com",
-	"password": "falsepassword"
+    "email": "mockuser@example.com",
+	"password": "mockfalsepassword"
 }
 
 ### login successfully
@@ -71,8 +71,8 @@ POST http://localhost:8080/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "newtestuser@gmail.com",
-	"password": "!1989@name"
+    "email": "mockuser@example.com",
+	"password": "mock@password"
 }
 
 ### invalid token

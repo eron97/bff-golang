@@ -47,16 +47,16 @@ Os testes são uma parte crucial do projeto. Utilizamos um banco de dados em mem
 - **Descrição**: Cria um novo usuário no sistema.
 - **Request Body**:
   ```json
-  {
-    "first_name": "John",
-    "last_name": "Doe",
-    "email": "john.doe@example.com",
+{
+    "first_name": "your_name",
+    "last_name": "last_yame",
+    "email": "mockuser@example.com",
     "cep": "12345678",
     "country": "Brazil",
     "city": "São Paulo",
-    "address": "Rua das Flores, 123",
-    "password": "password#@#@!2121"
-  }
+    "address": "Rua mock, 123",
+    "password": "mock@password"
+}
   ```
 - **Response**:
   - **Status 201**: Usuário criado com sucesso.
@@ -71,8 +71,8 @@ Os testes são uma parte crucial do projeto. Utilizamos um banco de dados em mem
 - **Request Body**:
   ```json
   {
-    "email": "john.doe@example.com",
-    "password": "password#@#@!2121"
+    "email": "mockuser@example.com",
+    "password": "mock@password"
   }
   ```
 - **Response**:
@@ -90,10 +90,20 @@ Os testes são uma parte crucial do projeto. Utilizamos um banco de dados em mem
   - **Status 403**: Permissão negada.
   - **Status 401**: Token inválido ou ausente.
 
+  ### Serviço Externo
+
+- **URL**: `/otherservice`
+- **Método**: GET
+- **Descrição**: Acessa um serviço externo. Requer autenticação JWT com a role "user".
+- **Response**:
+  - **Status 200**: Serviço encontrado com sucesso.
+  - **Status 403**: Permissão negada.
+  - **Status 401**: Token inválido ou ausente.
+
 ## Como Executar
 
 1. Clone o repositório.
-2. Configure as variáveis de ambiente no arquivo `.env`.
+2. Variáveis de ambiente no arquivo estão corretas apontando para um banco de dados em memória `.env`.
 3. Execute o comando `go run cmd/server/main.go` para iniciar o servidor.
 
 ## Testando com Docker
