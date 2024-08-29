@@ -35,7 +35,7 @@ func (ctl *Controller) CreateUser(ctx *fiber.Ctx) error {
 
 	resp, err := ctl.service.CreateUserService(createUser)
 	if err != nil {
-		return ctx.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+		return ctx.Status(err.Code).JSON(fiber.Map{
 			"error": "Error creating user: " + err.Error(),
 		})
 	}
@@ -64,7 +64,7 @@ func (ctl *Controller) LoginUser(ctx *fiber.Ctx) error {
 	_, err := ctl.service.LoginUserService(user)
 	if err != nil {
 		zap.L().Error("Error when logging in", zap.Error(err))
-		return ctx.Status(fiber.StatusNotFound).JSON(fiber.Map{
+		return ctx.Status(err.Code).JSON(fiber.Map{
 			"error": err.Error(),
 		})
 	}

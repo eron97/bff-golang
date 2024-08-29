@@ -95,7 +95,7 @@ func TestCreateUserError(t *testing.T) {
 
 	resp, _ := app.Test(req)
 
-	assert.Equal(t, fiber.StatusInternalServerError, resp.StatusCode)
+	assert.Equal(t, fiber.StatusBadRequest, resp.StatusCode)
 
 	var responseBody map[string]interface{}
 	json.NewDecoder(resp.Body).Decode(&responseBody)

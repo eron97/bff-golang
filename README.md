@@ -40,8 +40,6 @@ Os testes são uma parte crucial do projeto. Utilizamos um banco de dados em mem
 
 ## Endpoints
 
-## Endpoints
-
 ### Registro de Usuário
 
 - **URL**: `/register`
@@ -52,12 +50,12 @@ Os testes são uma parte crucial do projeto. Utilizamos um banco de dados em mem
   {
     "first_name": "John",
     "last_name": "Doe",
-    "email": "john.doe@example.com",
+    "email": "mockuser@example.com",
     "cep": "12345678",
     "country": "Brazil",
     "city": "São Paulo",
-    "address": "Rua das Flores, 123",
-    "password": "password#@#@!2121"
+    "address": "Rua Mock, 123",
+    "password": "mock@password"
   }
   ```
 - **Response**:
@@ -81,6 +79,7 @@ Os testes são uma parte crucial do projeto. Utilizamos um banco de dados em mem
   - **Status 200**: Login efetuado com sucesso.
   - **Status 400**: Erro de validação.
   - **Status 404**: Erro de usuário não encontrado.
+  - **Status 401**: Senha incorreta.
 
   ### Serviço Externo
 
