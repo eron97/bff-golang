@@ -106,3 +106,5 @@ Os testes são uma parte crucial do projeto. Utilizamos um banco de dados em mem
 - **Observabilidade e OpenTelemetry**: Planejo adicionar rastreamento e monitoramento utilizando OpenTelemetry em uma próxima feature.
 
 - **CI/CD Pipeline**: O repositório contará com uma pipeline CI/CD utilizando Terraform para provisionamento em nuvem, especificamente na AWS.
+
+- **Documentação Swagger**: Posteriormente, será feita uma documentação Swagger do projeto para facilitar a visualização e teste dos endpoints.
