@@ -78,7 +78,7 @@ Os testes são uma parte crucial do projeto. Utilizamos um banco de dados em mem
 - **Response**:
   - **Status 200**: Login efetuado com sucesso.
   - **Status 400**: Erro de validação.
-  - **Status 404**: Erro interno no servidor.
+  - **Status 404**: Erro de usuário não encontrado.
 
 ### Obter Usuário
 
