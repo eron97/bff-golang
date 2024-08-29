@@ -1,10 +1,10 @@
 # BFF E-commerce
 
-Este projeto é um Backend for Frontend (BFF) para um site de e-commerce, implementado em Go. Ele fornece funcionalidades de login e autorização, seguindo uma arquitetura de camadas bem definida. Abaixo, detalhamos a estrutura do projeto, as tecnologias utilizadas, a injeção de dependências e os endpoints disponíveis.
+Este projeto é um Backend for Frontend (BFF) para um site de e-commerce, implementado em Go. Ele fornece funcionalidades de login e autorização, seguindo uma arquitetura de camadas bem definida. Abaixo, detalho a estrutura do projeto, as tecnologias utilizadas, a injeção de dependências e os endpoints disponíveis.
 
 ## Contexto Geral
 
-A ideia é usar este BFF para se conectar a um front-end desenvolvido em Angular com TypeScript de um e-commerce similar à Amazon. O BFF será a aplicação responsável por intermediar as requisições do front para os microsserviços (como de produtos, compras, rastreio, etc.) que estarão em sub-redes privadas na AWS. A comunicação ocorrerá por meio de autenticação de usuários e roles do IAM, para evitar exposição na internet pública. Este BFF estará dentro de um API Gateway, sendo também responsável por login com autenticação multifator e autorização, além de aplicar observabilidade por meio de tracers, permitindo encontrar e analisar gargalos de comunicação e processamento entre todos os microserviços que serão chamados para atender a solicitação de quem está consumindo determinado endpoint.
+A ideia é usar este BFF para se conectar a um front-end desenvolvido em Angular com TypeScript de um e-commerce similar à Amazon (apenas para fins didáticos). O BFF será a aplicação responsável por intermediar as requisições do front para os microsserviços (como de produtos, compras, rastreio, etc.) que estarão em sub-redes privadas na AWS. A comunicação ocorrerá por meio de autenticação de usuários e roles do IAM, para evitar exposição na internet pública. Este BFF estará dentro de um API Gateway, sendo também responsável por login com autenticação multifator e autorização, além de aplicar observabilidade por meio de tracers, permitindo encontrar e analisar gargalos de comunicação e processamento entre todos os microserviços que serão chamados para atender a solicitação de quem está consumindo determinado endpoint.
 
 ![Projeto Amazon](project_amazon.png)
 
@@ -38,7 +38,7 @@ A injeção de dependências é realizada através de construtores que recebem i
 
 ## Testes
 
-Os testes são uma parte crucial do projeto. Utilizamos um banco de dados em memória para testes, garantindo que os testes sejam rápidos e isolados. Além disso, utilizamos a biblioteca GoMock da Uber para gerar mocks das interfaces, permitindo testes unitários eficazes.
+Os testes são uma parte crucial do projeto. Utilizo um banco de dados em memória para testes, garantindo que os testes sejam rápidos e isolados. Além disso, também está presente a biblioteca GoMock da Uber para gerar mocks das interfaces, permitindo testes unitários eficazes.
 
 ## Endpoints
 
@@ -85,7 +85,7 @@ Os testes são uma parte crucial do projeto. Utilizamos um banco de dados em mem
 
   ### Serviço Externo
 
-- **URL**: `/otherservice`
+- **URL**: `api/otherservice`
 - **Método**: GET
 - **Descrição**: Acessa um serviço externo. Requer autenticação JWT com a role "user".
 - **Response**:
@@ -103,9 +103,14 @@ Os testes são uma parte crucial do projeto. Utilizamos um banco de dados em mem
 
 É possível testar esta API BFF usando o Dockerfile para criar uma imagem e executá-la na porta 8080 com os seguintes comandos:
 
+1.  Acesse a raíz do projeto onde se encontra o arquivo de build da imagem
+2.  Rode o comando: docker build -t minha-api .
+3.  Verifique se a imagem foi criada com o comando: docker images
+4.  Rode o comando: docker run -p 8080:8080 minha-api
+
 ## Futuras Implementações
 
-- **Observabilidade e OpenTelemetry**: Planejo adicionar rastreamento e monitoramento utilizando OpenTelemetry em uma próxima feature.
+- **Observabilidade e OpenTelemetry**: Planejo adicionar rastreamento e monitoramento utilizando OpenTelemetry.
 
 - **CI/CD Pipeline**: O repositório contará com uma pipeline CI/CD utilizando Terraform para provisionamento em nuvem, especificamente na AWS.
 
