@@ -40,6 +40,8 @@ Os testes são uma parte crucial do projeto. Utilizamos um banco de dados em mem
 
 ## Endpoints
 
+## Endpoints
+
 ### Registro de Usuário
 
 - **URL**: `/register`
@@ -47,16 +49,16 @@ Os testes são uma parte crucial do projeto. Utilizamos um banco de dados em mem
 - **Descrição**: Cria um novo usuário no sistema.
 - **Request Body**:
   ```json
-{
-    "first_name": "your_name",
-    "last_name": "last_yame",
-    "email": "mockuser@example.com",
+  {
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john.doe@example.com",
     "cep": "12345678",
     "country": "Brazil",
     "city": "São Paulo",
-    "address": "Rua mock, 123",
-    "password": "mock@password"
-}
+    "address": "Rua das Flores, 123",
+    "password": "password#@#@!2121"
+  }
   ```
 - **Response**:
   - **Status 201**: Usuário criado com sucesso.
@@ -79,16 +81,6 @@ Os testes são uma parte crucial do projeto. Utilizamos um banco de dados em mem
   - **Status 200**: Login efetuado com sucesso.
   - **Status 400**: Erro de validação.
   - **Status 404**: Erro de usuário não encontrado.
-
-### Obter Usuário
-
-- **URL**: `/api/user/:id`
-- **Método**: GET
-- **Descrição**: Retorna as informações de um usuário específico. Requer autenticação JWT.
-- **Response**:
-  - **Status 200**: Informações do usuário.
-  - **Status 403**: Permissão negada.
-  - **Status 401**: Token inválido ou ausente.
 
   ### Serviço Externo
 
