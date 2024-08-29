@@ -6,6 +6,8 @@ Este projeto é um Backend for Frontend (BFF) para um site de e-commerce, implem
 
 A ideia é usar este BFF para se conectar a um front-end desenvolvido em Angular com TypeScript de um e-commerce similar à Amazon. O BFF será a aplicação responsável por intermediar as requisições do front para os microsserviços (como de produtos, compras, rastreio, etc.) que estarão em sub-redes privadas na AWS. A comunicação ocorrerá por meio de autenticação de usuários e roles do IAM, para evitar exposição na internet pública. Este BFF estará dentro de um API Gateway, sendo também responsável por login com autenticação multifator e autorização, além de aplicar observabilidade por meio de tracers, permitindo encontrar e analisar gargalos de comunicação e processamento entre todos os microserviços que serão chamados para atender a solicitação de quem está consumindo determinado endpoint.
 
+![Projeto Amazon](project_amazon.png)
+
 Ao decorrer deste projeto, a ideia é utilizar o Redis para armazenar códigos randômicos para comparar com os que serão inseridos pelo usuário na hora da autenticação multifator.
 
 O projeto como um todo, ao decorrer do tempo, utilizará DynamoDB, PostgreSQL, filas SQS, SNS, S3 buckets, Lambdas e outros serviços da AWS.
