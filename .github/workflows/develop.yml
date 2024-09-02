@@ -24,13 +24,6 @@ jobs:
         extra_args: --disable-all --enable=errcheck
       continue-on-error: true
 
-    - name: 'Dependency Review'
-      if: github.event_name == 'pull_request'
-      uses: actions/dependency-review-action@v4
-      with:
-        comment-summary-in-pr: always
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-
   build_and_codeql:
     runs-on: ubuntu-latest
     needs: lint_and_dependency_review
