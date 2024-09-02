@@ -28,9 +28,7 @@ jobs:
       uses: actions/dependency-review-action@v4
       with:
         comment-summary-in-pr: always
-        base-ref: ${{ github.base_ref }}
-        head-ref: ${{ github.head_ref }}
-
+        
   build_and_codeql:
     runs-on: ubuntu-latest
     needs: lint_and_dependency_review
