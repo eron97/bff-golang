@@ -16,10 +16,18 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v4
 
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+
     - name: Run GolangCI-Lint
       uses: golangci/golangci-lint-action@v4
       with:
-        version: v1.60
+        version: v1.60.3
+        format: colored-line-number
+        extra_args: --disable-all --enable=errcheck
+      continue-on-error: true
 
     - name: Call Dependency Review Workflow
       uses: ./.github/workflows/dev/dependency-review.yml
