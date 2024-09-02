@@ -25,7 +25,7 @@ jobs:
       continue-on-error: true
 
     - name: Call Dependency Review Workflow
-      uses: ./.github/workflows/dev/dependency-review.yml
+      uses: dependency-review.yml
 
   build_and_codeql:
     runs-on: ubuntu-latest
