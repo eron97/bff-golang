@@ -9,8 +9,42 @@ on:
     branches: [ "develop" ]
 
 jobs:
-  build:
+  lint_and_dependency_review:
     runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+
+    - name: Run GolangCI-Lint
+      uses: golangci/golangci-lint-action@v4
+      with:
+        version: v1.60.3
+        format: colored-line-number
+        extra_args: --disable-all --enable=errcheck
+      continue-on-error: true
+
+    - name: 'Dependency Review'
+      if: github.event_name == 'pull_request'
+      uses: actions/dependency-review-action@v4
+      with:
+        comment-summary-in-pr: always
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+  build_and_codeql:
+    runs-on: ubuntu-latest
+    needs: lint_and_dependency_review
+
+    strategy:
+      matrix:
+        language: [go]
+        build-mode: [autobuild]
+
+    permissions:
+      security-events: write
+      contents: read
+      packages: read
+      actions: read
 
     steps:
     - name: Check out code
@@ -23,6 +57,13 @@ jobs:
 
     - name: Build Go project
       run: go build -v ./...
+
+    - name: Run CodeQL Analysis
+      uses: github/codeql-action/init@v3
+      with:
+        languages: go
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
 
     - name: Create pull request to develop
       if: ${{ success() }}
