@@ -24,6 +24,21 @@ jobs:
     - name: Build Go project
       run: go build -v ./...
 
+    - name: Run GolangCI-Lint
+      uses: golangci/golangci-lint-action@v3
+      with:
+        version: v1.50.1
+
+    - name: Run CodeQL Analysis
+      uses: github/codeql-action/init@v2
+      with:
+        languages: go
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+
+    - name: Dependency Review
+      uses: github/dependency-review-action@v2
+
     - name: Create pull request to develop
       if: ${{ success() }}
       uses: repo-sync/pull-request@v2
