@@ -16,9 +16,6 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v4
 
-    - name: Install dependencies
-      run: go mod tidy
-
     - name: Run GolangCI-Lint
       uses: golangci/golangci-lint-action@v4
       with:
