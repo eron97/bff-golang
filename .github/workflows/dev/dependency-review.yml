@@ -1,0 +1,17 @@
+name: "Dependency Review"
+
+on:
+  workflow_call:
+
+jobs:
+  dependency-review:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+
+    - name: Dependency Review
+      uses: actions/dependency-review-action@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}

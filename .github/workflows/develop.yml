@@ -26,8 +26,8 @@ jobs:
       with:
         version: v1.50.1
 
-    - name: Dependency Review
-      uses: actions/dependency-review-action@v2
+    - name: Call Dependency Review Workflow
+      uses: ./.github/workflows/dev/dependency-review.yml
 
   build_and_codeql:
     runs-on: ubuntu-latest
