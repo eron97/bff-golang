@@ -1,0 +1,35 @@
+name: "Build & Deploy DEV"
+
+on:
+  push:
+    branches:
+      - 'feature/*'
+      - 'fix**'
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.20'
+
+    - name: Build Go project
+      run: go build -v ./...
+
+    - name: Create pull request to develop
+      if: ${{ success() }}
+      uses: repo-sync/pull-request@v2
+      with:
+        source_branch: ${{ github.head_ref }}
+        destination_branch: develop
+        pr_title: 'Merge ${{ github.head_ref }} into develop'
+        pr_body: 'Automatic pull request created from CI'
+        github_token: ${{ secrets.GITHUB_TOKEN }}
