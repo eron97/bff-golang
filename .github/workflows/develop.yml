@@ -24,7 +24,7 @@ jobs:
     - name: Run GolangCI-Lint
       uses: golangci/golangci-lint-action@v4
       with:
-        version: v1.21
+        version: v1.60
 
     - name: Call Dependency Review Workflow
       uses: ./.github/workflows/dev/dependency-review.yml
