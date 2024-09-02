@@ -5,6 +5,9 @@ on:
     workflows: ["Build & Deploy DEV"]
     types:
       - completed
+  pull_request:
+    branches:
+      - develop
 
 jobs:
   codeql:
