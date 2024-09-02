@@ -32,4 +32,4 @@ jobs:
         destination_branch: develop
         pr_title: 'Merge ${{ github.head_ref }} into develop'
         pr_body: 'Automatic pull request created from CI'
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
