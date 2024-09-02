@@ -24,8 +24,11 @@ jobs:
         extra_args: --disable-all --enable=errcheck
       continue-on-error: true
 
-    - name: Call Dependency Review Workflow
-      uses: dependency-review.yml
+    - name: 'Dependency Review'
+      uses: actions/dependency-review-action@v4
+      with:
+        comment-summary-in-pr: always
+        token: ${{ secrets.GITHUB_TOKEN }}
 
   build_and_codeql:
     runs-on: ubuntu-latest
