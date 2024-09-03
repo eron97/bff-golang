@@ -11,8 +11,8 @@ on:
 
 jobs:
   dependency_review:
-    if: startsWith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
+    if: startsWith(github.head_ref, 'feature/') || github.event_name == 'pull_request'
 
     steps:
     - name: Check out code
