@@ -41,7 +41,6 @@ jobs:
     - name: Run tests and generate coverage report
       run: |
         go test -v ./... -coverprofile=coverage.out
-        go test -json > test-report.out
 
     - name: Upload coverage report
       uses: actions/upload-artifact@v2
@@ -57,7 +56,6 @@ jobs:
           -Dsonar.organization=eron97
           -Dsonar.sources=.
           -Dsonar.go.coverage.reportPaths=coverage.out
-          -Dsonar.go.tests.reportPaths=test-report.out
           -Dsonar.projectVersion=${{ github.sha }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
