@@ -64,6 +64,7 @@ jobs:
       with:
         args: |
           -Dsonar.projectKey=bff-golang
+          -Dsonar.organization=eron97
           -Dsonar.sources=.
           -Dsonar.go.coverage.reportPaths=coverage.out
           -Dsonar.projectVersion=${{ github.sha }}
