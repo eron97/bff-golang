@@ -8,16 +8,14 @@ on:
   pull_request:
     branches:
       - develop
+  push:
+    branches:
+      - main
 
 jobs:
   codeql:
     if: startsWith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        language: [go]
-        build-mode: [autobuild]
-
     permissions:
       security-events: write
       contents: read
@@ -46,6 +44,12 @@ jobs:
   dependency_review:
     needs: codeql
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+      packages: read
+      pull-requests: write
+      actions: read
 
     steps:
     - name: Check out code
