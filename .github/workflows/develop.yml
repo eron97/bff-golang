@@ -39,7 +39,25 @@ jobs:
       run: go build -v ./...
 
     - name: Run tests and generate coverage report
-      run: go test -v ./... -coverprofile=coverage.out      
+      run: go test -v ./... -coverprofile=coverage.out
+
+    - name: Verify coverage report
+      run: |
+        if [ ! -f coverage.out ]; then
+          echo "Coverage report not found!"
+          exit 1
+        fi
+        if [ ! -s coverage.out ]; then
+          echo "Coverage report is empty!"
+          exit 1
+        fi
+        echo "Coverage report generated successfully."      
+
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverage-report
+        path: coverage.out 
 
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
