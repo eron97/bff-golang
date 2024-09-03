@@ -1,0 +1,63 @@
+name: "Dependency Review"
+
+on:
+  workflow_run:
+    workflows: ["Build & Deploy DEV"]
+    types:
+      - completed
+  pull_request:
+    branches:
+      - develop
+  push:
+    branches:
+      - main
+
+jobs:
+  codeql:
+    if: startsWith(github.head_ref, 'feature/')
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+      packages: read
+      actions: read
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+
+    - name: Build Go project
+      run: go build -v ./...
+
+    - name: Run CodeQL Analysis
+      uses: github/codeql-action/init@v3
+      with:
+        languages: go
+        
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+
+  dependency_review:
+    needs: codeql
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+      packages: read
+      pull-requests: write
+      actions: read
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+
+    - name: 'Dependency Review'
+      uses: actions/dependency-review-action@v4
+      with:
+        comment-summary-in-pr: always
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
