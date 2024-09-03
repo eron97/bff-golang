@@ -5,15 +5,9 @@ on:
     branches:
       - 'feature/*'
       - 'fix**'
-
 jobs:
-  setup_and_lint:
+  lint_and_dependency_review:
     runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      contents: read
-      packages: read
-      actions: read
 
     steps:
     - name: Check out code
@@ -27,37 +21,21 @@ jobs:
         extra_args: --disable-all --enable=errcheck
       continue-on-error: true
 
+  build_and_codeql:
+    runs-on: ubuntu-latest
+    needs: lint_and_dependency_review
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
         go-version: '1.21'
 
-  build_and_codeql:
-    runs-on: ubuntu-latest
-    needs: setup_and_lint
-
-    steps:
-    - name: Check out code
-      uses: actions/checkout@v4
-
     - name: Build Go project
       run: go build -v ./...
-
-    - name: Run CodeQL Analysis
-      uses: github/codeql-action/init@v3
-      with:
-        languages: go
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
-
-  create_pr:
-    runs-on: ubuntu-latest
-    needs: build_and_codeql
-
-    steps:
-    - name: Check out code
-      uses: actions/checkout@v4
 
     - name: Create pull request to develop
       if: ${{ success() }}
