@@ -8,16 +8,14 @@ on:
   pull_request:
     branches:
       - develop
+  push:
+    branches:
+      - main
 
 jobs:
   codeql:
     if: startsWith(github.head_ref, 'feature/')
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        language: [go]
-        build-mode: [autobuild]
-
     permissions:
       security-events: write
       contents: read
@@ -40,12 +38,19 @@ jobs:
       uses: github/codeql-action/init@v3
       with:
         languages: go
+        
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
 
   dependency_review:
     needs: codeql
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+      packages: read
+      pull-requests: write
+      actions: read
 
     steps:
     - name: Check out code
