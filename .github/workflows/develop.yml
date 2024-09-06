@@ -47,6 +47,9 @@ jobs:
       with:
         name: coverage-report
         path: coverage.out
+      
+    - name: List files in the current directory
+      run: ls -l
 
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@v3.0.0
