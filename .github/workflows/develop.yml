@@ -49,7 +49,7 @@ jobs:
         path: coverage.out
 
     - name: SonarCloud Scan
-      uses: SonarSource/sonarcloud-github-action@master
+      uses: SonarSource/sonarcloud-github-action@v1
       with:
         args: |
           -Dsonar.projectKey=eron97_bff-golang
