@@ -50,15 +50,6 @@ jobs:
 
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@v3.0.0
-      with:
-        args: >
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-          -Dsonar.projectKey=eron97_bff-golang
-          -Dsonar.organization=eron97
-          -Dsonar.sources=.
-          -Dsonar.go.coverage.reportPaths=coverage.out
-          -Dsonar.coverage.exclusions=**/*_test.go
-          -Dsonar.projectVersion=${{ github.sha }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
