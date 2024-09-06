@@ -47,21 +47,17 @@ jobs:
       with:
         name: coverage-report
         path: coverage.out
-      
-    - name: List files in the current directory
-      run: ls -l
-
-    - name: Show coverage.out content
-      run: cat coverage.out
 
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@v3.0.0
       with:
-        args: |
+        args: >
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
           -Dsonar.projectKey=eron97_bff-golang
           -Dsonar.organization=eron97
           -Dsonar.sources=.
           -Dsonar.go.coverage.reportPaths=coverage.out
+          -Dsonar.coverage.exclusions=**/*_test.go
           -Dsonar.projectVersion=${{ github.sha }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
